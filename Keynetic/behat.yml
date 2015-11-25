@@ -1,8 +1,6 @@
 default:
     extensions:
-        Behat\Symfony2Extension: ~
-        Behat\MinkExtension:
+        Behat\MinkExtension\Extension:
             base_url: 'http://127.0.0.1:8000'
-            sessions:
-                my_session:
-                    selenium2: ~
+            goutte: ~
+            selenium2: ~
