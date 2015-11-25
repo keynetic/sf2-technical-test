@@ -1,0 +1,42 @@
+{% set form =  repository.form %}
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"></div>
+<div class="col-md-6 col-xs-12 notif">
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash-notice">{{ flashMessage }}</div>
+    {% endfor %}
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"></div>
+<form class="form-horizontal" id="form-contact"
+      action="{{ path(app.request.attributes.get('_route'),{'username': username}) }}"
+      method="post">
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="col-md-4 col-xs-12">
+        <fieldset>
+            {{ form_widget(form.repo.id,{ 'attr': {'value': repository.id } }) }}
+        </fieldset>
+        <fieldset>
+            {{ form_errors(form.repo.name) }}
+            {{ form_widget(form.repo.name,{ 'attr': {'value': repository.full_name } }) }}
+        </fieldset>
+    </div>
+    <div class="col-md-4 col-xs-12">
+        <fieldset>
+            {{ form_errors(form.body) }}
+            {{ form_widget(form.body) }}
+        </fieldset>
+    </div>
+    <div class="col-md-4 col-xs-12">
+        {{ form_widget(form.save) }}
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <ul>
+            {% for comment in repository.comments %}
+                <i>{{ comment.date|date("m/d/Y") }}</i><br/>
+                <p>{{ comment.body }}</p>
+            {% endfor %}
+        </ul>
+    </div>
+    {{ form_end(form) }}
+</form>
