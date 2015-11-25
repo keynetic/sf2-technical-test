@@ -1,24 +1,30 @@
 <?php
 
-use Behat\Behat\Context\Context;
-use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
-use Behat\MinkExtension\Context\MinkContext;
+use Behat\MinkExtension\Context\MinkContext as Context;
 
 /**
- * Defines application features from the specific context.
+ * Features context.
  */
-class FeatureContext extends MinkContext implements Context, SnippetAcceptingContext
-{
+class FeatureContext extends Context {
+
     /**
-     * Initializes context.
-     *
-     * Every scenario gets its own context instance.
-     * You can also pass arbitrary arguments to the
-     * context constructor through behat.yml.
+     * @Given /^I am authenticated as "([^"]*)" using "([^"]*)"$/
      */
-    public function __construct()
-    {
+    public function iAmAuthenticatedAs($username, $password) {
+        $this->visit('/login');
+        $this->fillField('_username', $username);
+        $this->fillField('_password', $password);
+        $this->pressButton('_submit');
+    }
+
+    /**
+     * @When /^I look for the repos of "([^"]*)"$/
+     */
+    public function iLookForTheReposOf($user) {
+        $this->fillField('q', $user);
+        $this->pressButton('_submit');
+        $this->clickLink($user);
+        $this->assertPageAddress('/'.$user.'/comment');
+        $this->assertPageContainsText('Repositories of '.$user);
     }
 }

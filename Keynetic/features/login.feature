@@ -7,9 +7,9 @@ Feature: Log in
   Scenario: Successful log in
     Given I am on "/login"
     When I fill in "_username" with "xtrmbkke"
-    And I fill in "_password" with "Start666"
+    And I fill in "_password" with "Start999"
     And I press "_submit"
-    Then I should be on "/search"
+    Then I should be on the homepage
 
   Scenario: Unsuccessful log in
     Given I am on "/login"
