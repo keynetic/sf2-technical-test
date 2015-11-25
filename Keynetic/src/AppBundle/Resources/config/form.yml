@@ -1,0 +1,14 @@
+parameters:
+
+services:
+    form.type.comment:
+        class: AppBundle\Form\Type\CommentType
+        arguments: ~
+        tags:
+            - { name: form.type, alias: comment }
+
+    form.type.repository:
+        arguments: ~
+        class: AppBundle\Form\Type\RepoType
+        tags:
+            - { name: form.type, alias: repo }

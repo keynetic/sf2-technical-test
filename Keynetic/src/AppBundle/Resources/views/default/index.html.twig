@@ -19,7 +19,7 @@
         <ul>
             {% for user in results.users %}
                 <li>
-                    {{ user.username }}
+                    <a href="{{ path('comment', { 'username' : user.username }) }}">{{ user.username }}</a>
                 </li>
             {% endfor %}
         </ul>
