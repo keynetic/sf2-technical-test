@@ -24,7 +24,5 @@ class FeatureContext extends Context {
         $this->fillField('q', $user);
         $this->pressButton('_submit');
         $this->clickLink($user);
-        $this->assertPageAddress('/'.$user.'/comment');
-        $this->assertPageContainsText('Repositories of '.$user);
     }
 }
